@@ -68,7 +68,7 @@ class _ClockScreenState extends State<ClockScreen> {
                     dateTime: clockState.getInitialDate(),
                   ),
                 ),
-                const SizedBox(height: 30),
+                const Spacer(),
                 Align(
                   alignment: Alignment.center,
                   child: buildSetAlarmWidget(clockState),
