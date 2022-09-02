@@ -38,7 +38,7 @@ class ClockDialPainter extends CustomPainter {
           color: Colors.black,
           fontSize: 15.0,
         ) {
-    tickPaint.color = Colors.black;
+    tickPaint.color = const Color(0xFF0E3993).withOpacity(0.7);
   }
 
   @override
@@ -49,28 +49,24 @@ class ClockDialPainter extends CustomPainter {
     canvas.save();
 
     canvas.translate(radius, radius);
-    // TODO : Change text to [3, 6, 9, 12]
     for (var i = 0; i < 60; i++) {
       tickMarkLength = (i % 5 == 0) ? hourTickMarkLength : minuteTickMarkLength;
-      tickPaint.strokeWidth = (i % 5 == 0) ? hourTickMarkWidth : minuteTickMarkWidth;
-      canvas.drawLine(Offset(0.0, -radius), Offset(0.0, -radius + tickMarkLength), tickPaint);
+      tickPaint.strokeWidth =
+          (i % 5 == 0) ? hourTickMarkWidth : minuteTickMarkWidth;
+      canvas.drawLine(Offset(0.0, -radius),
+          Offset(0.0, -radius + tickMarkLength), tickPaint);
 
-      //draw the text
       if (i % 5 == 0) {
-          canvas.save();
-          canvas.translate(0.0, -radius + 20.0);
-          textPainter.text = TextSpan(
-            text: "${i == 0 ? 12 : i ~/ 5}",
-            style: textStyle,
-          );
-          //helps make the text painted vertically
-          canvas.rotate(-angle * i);
+        canvas.save();
+        canvas.translate(0.0, -radius + 20.0);
+        textPainter.text = TextSpan(
+          text: "${i == 0 ? 12 : i ~/ 5}",
+          style: textStyle,
+        );
+        canvas.rotate(-angle * i);
+        textPainter.layout();
 
-          textPainter.layout();
-          //textPainter.paint(canvas, Offset(-(textPainter.width / 2), -(textPainter.height / 2)));
-
-          canvas.restore();
-        //}
+        canvas.restore();
       }
 
       canvas.rotate(angle);

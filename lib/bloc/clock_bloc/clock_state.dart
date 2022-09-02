@@ -29,7 +29,17 @@ class ClockState {
     return DateTime(dateTime.year, dateTime.month, dateTime.day, 12, 00);
   }
 
-  String getDateTimeFormat() {
-    return DateFormat('yyyy-MM-dd hh:mm a').format(dateTime);
+  String getDateTimeFormat(bool isAm) {
+    return DateFormat('yyyy-MM-dd hh:mm a').format(getDateTime(isAm));
+  }
+
+  DateTime getDateTime(bool isAm) {
+    DateTime now = dateTime;
+    return DateTime(
+      now.year,
+      now.month,
+      now.hour > (isAm ? now.hour : now.hour + 12) ? now.day + 1 : now.hour == (isAm ? now.hour : now.hour + 12) && now.minute >= now.minute && now.second > 0 ? now.day + 1 : now.day, isAm ? now.hour : now.hour + 12,
+      now.minute
+    );
   }
 }

@@ -34,7 +34,7 @@ class _ClockScreenState extends State<ClockScreen> {
   void onClickNotification(String? payload) async {
     final Alarm alarm = Alarm(
       notif: DateFormat('yyyy-MM-dd hh:mm:ss a').format(DateTime.parse(payload!)),
-      second: DateTime.now().difference(DateTime.parse(payload!)).inSeconds,
+      second: DateTime.now().difference(DateTime.parse(payload)).inSeconds,
         dateTime: DateTime.now().toString()
     );
     showModalBottomSheet<void>(
@@ -68,7 +68,7 @@ class _ClockScreenState extends State<ClockScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Clock(
-                    circleColor: Colors.white,
+                    circleColor: Colors.grey.shade300,
                     dateTime: clockState.getInitialDate(),
                   ),
                 ),
@@ -85,13 +85,12 @@ class _ClockScreenState extends State<ClockScreen> {
                     NotificationApiListener.showNotificationSchedule(
                         title: 'Wake Up',
                         body: 'Your alarm is active',
-                        payload: clockState.dateTime.toString(),//clockState.dateTime.toString(),
-                        scheduleDate: clockState.dateTime,//clockState.dateTime,
+                        payload: clockState.getDateTime(isAm).toString(),
+                        scheduleDate: clockState.getDateTime(isAm)
                     );
 
-                    final snackBar = SnackBar(content: Text('Alarm has been set on ${clockState.getDateTimeFormat()}'));
+                    final snackBar = SnackBar(content: Text('Alarm has been set on ${clockState.getDateTimeFormat(isAm)}'));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
                   } : null,
                   style: ElevatedButton.styleFrom(
                     primary: const Color(0xFF0E3993),
@@ -113,7 +112,7 @@ class _ClockScreenState extends State<ClockScreen> {
     return Column(
       children: [
         Text(clockState.getTimeFormat(),
-            style: const TextStyle(fontSize: 50, fontWeight: FontWeight.w500)
+            style: const TextStyle(fontSize: 50, color: Color(0xFF0E3993), fontWeight: FontWeight.w500)
         ),
         const SizedBox(height: 10),
         ToggleButtons(

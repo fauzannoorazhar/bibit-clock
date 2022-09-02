@@ -27,6 +27,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: RemoveScrollGlowBehavior(),
+          child: child!,
+        );
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -34,5 +40,13 @@ class MyApp extends StatelessWidget {
         body: ClockScreen(),
       ),
     );
+  }
+}
+
+class RemoveScrollGlowBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }

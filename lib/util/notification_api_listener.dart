@@ -9,8 +9,7 @@ class NotificationApiListener {
   static Future init({bool initScheduled = false}) async {
     final android = AndroidInitializationSettings('@mipmap/ic_launcher');
     final ios = IOSInitializationSettings();
-    final initializationSettings =
-        InitializationSettings(android: android, iOS: ios);
+    final initializationSettings = InitializationSettings(android: android, iOS: ios);
     await notification.initialize(
       initializationSettings,
       onSelectNotification: (payload) async {

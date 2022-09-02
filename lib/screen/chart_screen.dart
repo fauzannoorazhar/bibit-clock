@@ -18,9 +18,19 @@ class _ChartScreenState extends State<ChartScreen> {
       chart.Series(
         id: "notif",
         data: widget.listAlarm,
+        fillColorFn: (Alarm series, _) => chart.ColorUtil.fromDartColor(
+          const Color(0xFFBFBDBD),
+        ),
+        patternColorFn: (Alarm series, _) => chart.ColorUtil.fromDartColor(
+          const Color(0xFFFFFFFF),
+        ),
+        areaColorFn: (Alarm series, _) => chart.ColorUtil.fromDartColor(
+          const Color(0xFFFFFFFF),
+        ),
+        seriesColor: chart.Color.fromHex(code: 'FFFFFFF'),
         domainFn: (Alarm series, _) => series.notif!,
         measureFn: (Alarm series, _) => series.second,
-        colorFn: (Alarm series, _) =>  chart.ColorUtil.fromDartColor(
+        colorFn: (Alarm series, _) => chart.ColorUtil.fromDartColor(
           const Color(0xFF0E3993),
         ),
       )
@@ -55,6 +65,7 @@ class _ChartScreenState extends State<ChartScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 15),
               Expanded(
                 child: chart.BarChart(
                   series,
