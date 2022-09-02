@@ -88,10 +88,8 @@ class _ClockScreenState extends State<ClockScreen> {
                         payload: clockState.dateTime.toString(),//clockState.dateTime.toString(),
                         scheduleDate: clockState.dateTime,//clockState.dateTime,
                     );
-                    final snackBar = SnackBar(
-                      content: Text('Alarm has been set on ${clockState.getDateTimeFormat()}'),
-                    );
 
+                    final snackBar = SnackBar(content: Text('Alarm has been set on ${clockState.getDateTimeFormat()}'));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
                   } : null,
@@ -148,7 +146,6 @@ class _ClockScreenState extends State<ClockScreen> {
                   isAm = index == 0 ? true : false;
                   isActived = false;
                   isSelectedTime[buttonIndex] = true;
-                  //NotificationApi.cancel();
                 } else {
                   isSelectedTime[buttonIndex] = false;
                 }
