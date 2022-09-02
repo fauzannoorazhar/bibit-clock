@@ -34,12 +34,26 @@ class _ChartScreenState extends State<ChartScreen> {
           padding: const EdgeInsets.all(8),
           child: Column(
             children: [
-              const Text(
-                'Bar Chart Time Open In Second',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InkWell(
+                    child: const Icon(Icons.close),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'Bar Chart',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Expanded(
                 child: chart.BarChart(

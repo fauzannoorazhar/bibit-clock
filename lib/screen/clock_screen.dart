@@ -6,7 +6,10 @@ import 'package:bibit_clock/screen/widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charts_flutter/flutter.dart' as chart;
+import 'package:intl/intl.dart';
+import 'package:localstore/localstore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bibit_clock/util/database.dart';
 
 class ClockScreen extends StatefulWidget {
   const ClockScreen({Key? key}) : super(key: key);
@@ -30,8 +33,9 @@ class _ClockScreenState extends State<ClockScreen> {
 
   void onClickNotification(String? payload) async {
     final Alarm alarm = Alarm(
-      notif: payload,
-      second: DateTime.now().difference(DateTime.parse(payload!)).inSeconds, dateTime: DateTime.now().toString()
+      notif: DateFormat('yyyy-MM-dd hh:mm:ss a').format(DateTime.parse(payload!)),
+      second: DateTime.now().difference(DateTime.parse(payload!)).inSeconds,
+        dateTime: DateTime.now().toString()
     );
     showModalBottomSheet<void>(
       shape: RoundedRectangleBorder(
@@ -84,7 +88,6 @@ class _ClockScreenState extends State<ClockScreen> {
                         payload: clockState.dateTime.toString(),//clockState.dateTime.toString(),
                         scheduleDate: clockState.dateTime,//clockState.dateTime,
                     );
-
                     final snackBar = SnackBar(
                       content: Text('Alarm has been set on ${clockState.getDateTimeFormat()}'),
                     );

@@ -11,6 +11,7 @@ import 'package:timezone/data/latest.dart' as timeZone;
 
 void main() {
   timeZone.initializeTimeZones();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     BlocProvider(
       create: (context) => ClockBloc(),
