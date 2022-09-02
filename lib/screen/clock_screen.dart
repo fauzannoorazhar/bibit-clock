@@ -37,7 +37,12 @@ class _ClockScreenState extends State<ClockScreen> {
       second: DateTime.now().difference(DateTime.parse(payload)).inSeconds,
         dateTime: DateTime.now().toString()
     );
-    showModalBottomSheet<void>(
+
+    showChart(context , alarm);
+  }
+
+  void showChart(BuildContext context, Alarm alarm) async {
+    await showModalBottomSheet<void>(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
