@@ -10,8 +10,13 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:timezone/data/latest.dart' as timeZone;
 
 void main() {
+  // Initialize timeZone for notification schedule
   timeZone.initializeTimeZones();
+
+  // ensureInitialized for localstore
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize ClockBloc
   runApp(
     BlocProvider(
       create: (context) => ClockBloc(),
